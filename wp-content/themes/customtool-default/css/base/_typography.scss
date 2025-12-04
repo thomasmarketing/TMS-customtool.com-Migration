@@ -1,0 +1,190 @@
+body {
+  //@include font-feature-settings("kern","liga","frac", "pnum");
+  -webkit-font-smoothing: antialiased;
+  background-color: $base-background-color;
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: 1em;
+  line-height: $base-line-height;
+  @include mq(mediumv) {
+    font-size:.875em;
+  }
+  @include mq(smallv) {
+    font-size:.75em;
+  }
+}
+
+//Base Fonts
+@mixin base-font-size {
+  font-size: em(18);  
+}
+
+//Medium Fonts
+@mixin medium-font-size {
+  font-size: $medium-font-size;  
+}
+
+//Large Fonts
+@mixin large-font-size {
+  font-size: $large-font-size;
+}
+
+//xLarge Fonts
+@mixin xlarge-font-size {
+  font-size: $xlarge-font-size;
+}
+
+//Display Fonts
+@mixin display-font-size {
+  font-size: $display-font-size;
+}
+
+.display-font-size {
+  @include display-font-size;
+}
+
+.xlarge-font-size {
+  @include xlarge-font-size;
+}
+
+.large-font-size {
+  @include large-font-size;
+}
+
+.medium-font-size {
+  @include medium-font-size;
+  margin-bottom: $baseline*4;
+  margin-top: $baseline*3.5;
+}
+
+.base-font-size {
+  @include base-font-size;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: $header-font-family;
+  line-height: $header-line-height;
+  margin: 0;
+  color: $base-color;
+  font-weight: 700;
+}
+
+h1,
+.h1 {
+  @include display-font-size;
+  margin-top: 0;
+  margin-bottom: 8px;
+  
+}
+
+h2,
+.h2 {
+  @include xlarge-font-size;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+h3,
+.h3 {
+  @include large-font-size;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+h4,
+.h4 {
+  @include medium-font-size;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+h5,
+.h5 {
+  @include base-font-size;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+h6,
+.h6 {
+  font-size: em(16);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+p {
+  margin: 0 0 em(27,18);
+  font-size: em(18);
+  line-height: 1.75;
+  &:last-child{
+    margin-bottom: 0;
+  }
+}
+
+.emph {
+  font-size: em(20);
+  color: $green;
+  font-weight: normal;
+  font-style: normal;
+}
+
+a {
+  @include transition(color 0.1s linear);
+  color: $base-link-color;
+  text-decoration: none;
+  &:hover {
+    color: $base-link-color;
+    text-decoration: underline;
+  }
+  &:visited,
+  &:active,
+  &:focus {
+    /*color: $hover-link-color;*/
+    outline: none;
+  }
+  /*&:focus:not(:hover):not(:active) {
+    outline: 2px dashed #006129;
+    outline-offset: -1px;
+  }*/
+}
+
+hr {
+  border-bottom: $base-border;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: $base-spacing 0;
+}
+
+img,
+picture {
+  margin: 0;
+  max-width: 100%;
+}
+
+blockquote {
+  padding: 0;
+  margin: 0;
+}
+
+cite {
+  color: lighten($base-font-color, 25);
+  font-style: italic;
+  &:before {
+    content: "\2014 \00A0";
+  }
+}
+.column-subtext {
+    font-weight: 600;
+}

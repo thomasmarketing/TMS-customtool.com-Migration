@@ -1,0 +1,238 @@
+$btn-color:$green;
+$btn-alt-color:transparent;
+%button {
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  border-radius: $base-border-radius;
+  display: inline-block;
+  font-size: em(18);
+  font-weight: 400;
+  line-height: em(29,18);
+  padding: em(12.5,18) em(36,18);
+  text-decoration: none;
+  @include transition(all 0.2s ease-in-out);
+  text-align: center;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  &:after {
+    content: '';
+  }
+}
+
+.btn {
+  @extend %button;
+  background-color: $green;
+  border:1px solid $green;
+  color: $white;
+  &:focus, &:hover {
+    background-color: $dark-green;
+    border:1px solid $dark-green;
+    color: $white;
+  }
+}
+
+.btn-alt {
+  @extend %button;
+  background-color: $dark-green;
+  border:1px solid $dark-green;
+  color: $white;
+  &:focus,
+  &:hover {
+  background-color: $green;
+  border:1px solid $green;
+  color: $white;
+  }
+}
+
+.btn-alt2 {
+  @extend %button;
+  background-color: transparent;
+  border:1px solid $green;
+  color: $green;
+  &:after{
+    content: "\f054";
+    font: normal normal normal 14px / 1 FontAwesome;
+    margin-left: 5px;
+    font-size: em(18,18);
+  }
+  &:focus,
+  &:hover {
+  background-color: $green;
+  border:1px solid $green;
+  color: $white;
+  }
+}
+
+
+.btn-color {
+  @extend %button;
+  background-color: $white;
+  border:1px solid $white;
+  color: $green;
+  &:focus,
+  &:hover {
+   background-color: $white;
+    border:1px solid $white;
+    color: $dark-blue;
+  }
+}
+
+.btn-alt-color {
+  @extend %button;
+  border:1px solid $green;
+  background-color: $green;
+  color: $white;
+  &:focus,
+  &:hover {
+    background-color: $white;
+    border:1px solid $white;
+    color: $green;
+  }
+}
+
+.button,
+.wp-element-button,
+button,
+input[type="submit"] {
+  @extend %button;
+  @include appearance(none);
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  /*&:focus:not(:hover):not(:active) {
+    outline: 2px dashed red;
+    outline-offset: -1px;
+  }*/
+}
+
+p {
+  .button,
+  button,
+  input[type="submit"],
+  .btn,
+  .btn-alt {
+    font-size: em(16, 16);
+  }
+}
+
+//Icon Buttons
+%btn-ico {
+  @extend %button;
+  padding-right: 4em;
+  &:after {
+    content: '';
+    display: block;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 3em;
+    position: absolute;
+    background-position: center center;
+    background-size: 1.5em;
+    background-repeat: no-repeat;
+    @include transition(background 0.1s linear);
+  }
+  &:hover {
+    &:after {
+      background-size: 2em;
+    }
+  }
+}
+
+.btn-download {
+  @extend %btn-ico;
+  @extend %button;
+  &:after {
+    background-image: url(img/ico-download.svg);
+  }
+}
+
+.btn-alt-download {
+  @extend %btn-ico;
+  @extend .btn-alt;
+  &:after {
+    background-image: url(img/ico-download.svg);
+  }
+}
+
+.btn-arrow {
+  @extend %btn-ico;
+  @extend %button;
+  &:after {
+    background-image: url(img/ico-white-arrow-right.svg);
+  }
+}
+
+.btn-alt-arrow {
+  @extend %btn-ico;
+  @extend .btn-alt;
+  &:after {
+    background-image: url(img/ico-white-arrow-right.svg);
+  }
+}
+
+
+/*========= Additional Button Style ========*/
+.btn-wrap {
+  text-align: center;
+  @include mq(medium){
+    @include display(flex);
+    @include align-items(center);
+    @include flex-wrap(wrap);
+    @include justify-content (center);
+  }
+  @include mq(large){
+    @include justify-content (flex-start);
+  }
+}
+
+.btn-wrap-wo-bg{
+    display: block;
+    margin-bottom: em(24);
+    &:last-child{
+      margin:0;
+    }
+    > a:not(:first-child) {
+      margin-left: em(15,18);
+      margin-right: em(15,18);
+    }
+    > a:not(:last-child) {
+      margin-bottom: em(10,18);
+    }
+    @include mq(medium){
+      display: inline-block;
+      > a:not(:last-child) {
+        margin-bottom: 0;
+
+      }
+      > a:last-child {
+        margin-left: em(15,18);
+      }
+    }
+}
+
+.btn-wrap-bg {
+  width: 100%;
+  background: $dark-gray;
+  max-width: em(400);
+  padding: em(20) em(16);
+  text-align: center;
+
+  > a {
+    min-width: em(280,18);
+    max-width: 100%;
+    display: table;
+    margin: 0 auto;
+  }
+
+  > a:not(:last-child) {
+    margin-bottom: em(15,18);
+  }
+}
