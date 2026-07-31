@@ -997,3 +997,138 @@ $(document).ready(function () {
     $('.quick-quote-module').toggleClass('show');
   })
 });
+
+jQuery(document).ready(function($){
+    $(document).on('click', '.qty-plus', function(){
+        let input = $(this).siblings('.quantity').find('.qty');
+        let val = parseInt(input.val()) || 0;
+        input.val(val + 1).trigger('change');
+    });
+
+    $(document).on('click', '.qty-minus', function(){
+        let input = $(this).siblings('.quantity').find('.qty');
+        let val = parseInt(input.val()) || 1;
+        if (val > 1) input.val(val - 1).trigger('change');
+    });
+});
+
+
+jQuery(document).ready(function($) {
+    $('.list-product-wrap .product-list').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: true,
+        dots: false,
+        infinite: false,
+         prevArrow: '<button class="slick-prev custom-arrow prev"><img src="/wp-content/uploads/left.png" alt="arrow-left"></button>',
+        nextArrow: '<button class="slick-next custom-arrow next"><img src="/wp-content/uploads/right.png" alt="arrow-right"></button>',
+
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+});
+
+
+jQuery(document).ready(function($) {
+    $('.btn-quote').on('click', function(e) {
+        e.preventDefault(); 
+
+        $('.popup-form').addClass('active');
+    });
+});
+
+jQuery(document).ready(function ($) {
+
+    $('.custom-actions .btn-quote').on('click', function (e) {
+        e.preventDefault();
+        $('.popup-form').addClass('active');
+        $('body').addClass('popup-open');
+    });
+
+    $('.popup-form .popup-title svg').on('click', function () {
+        $('.popup-form').removeClass('active');
+        $('body').removeClass('popup-open');
+    });
+
+    $('.popup-form').on('click', function (e) {
+        if (!$(e.target).closest('.popup-content').length) {
+            $(this).removeClass('active');
+            $('body').removeClass('popup-open');
+        }
+    });
+
+});
+
+
+jQuery(function ($) {
+    let isAddingToCart = false; 
+
+    $('.custom-cart').on('submit', function (e) {
+        e.preventDefault();
+
+
+        if (isAddingToCart) return;
+
+        isAddingToCart = true;
+
+        const $form = $(this);
+        const $button = $form.find('button[name="add-to-cart"]');
+
+        const product_id = $button.val();
+        const quantity = $form.find('input.qty').val();
+
+        $button.prop('disabled', true).addClass('loading');
+
+        $.ajax({
+            type: 'POST',
+            url: wc_add_to_cart_params.wc_ajax_url.replace('%%endpoint%%', 'add_to_cart'),
+            data: {
+                product_id: product_id,
+                quantity: quantity
+            },
+            success: function (response) {
+
+                if (response.fragments) {
+                    $.each(response.fragments, function (key, value) {
+                        $(key).replaceWith(value);
+                    });
+                }
+
+                $(document.body).trigger('added_to_cart', [response.fragments, response.cart_hash]);
+
+                $('.popup-cart').addClass('active');
+            },
+            complete: function () {
+
+                isAddingToCart = false;
+
+$button.prop('disabled', false).removeClass('loading');
+            }
+        });
+    });
+});
+
+
+jQuery(document).ready(function($) {
+    $(document).on('click', '.popup-cart .popup-cart-header .close-cart svg', function() {
+        $('.popup-cart').removeClass('active');
+    });
+});

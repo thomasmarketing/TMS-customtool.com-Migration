@@ -1,3 +1,6 @@
+<?php 
+if ( is_singular('product') || is_shop() || is_post_type_archive('product') ) return;
+?>
 <?php if ( !is_front_page() && is_home() ):
 	$id = intval(get_option( 'page_for_posts' ));
 else: 
