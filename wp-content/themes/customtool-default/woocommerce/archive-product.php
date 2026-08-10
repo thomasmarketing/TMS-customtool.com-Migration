@@ -44,7 +44,7 @@ Starkers_Utilities::get_template_parts( array( 'parts/shared/html-header', 'part
 					<?php if ( get_field('pi_content', $id) ) : ?>
 						<?php echo get_field('pi_content', $id); ?>
 					<?php else : ?>
-						<p>The Daily Tool & Grind is Custom Tool & Grinding’s official blog. See what we’re up to around the shop as well as what’s going on around our industry.</p>
+<!-- 						<p>The Daily Tool & Grind is Custom Tool & Grinding’s official blog. See what we’re up to around the shop as well as what’s going on around our industry.</p> -->
 					<?php endif; ?>
 				</div>
 

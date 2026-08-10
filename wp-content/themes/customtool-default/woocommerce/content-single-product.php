@@ -76,7 +76,7 @@ if ( post_password_required() ) {
             </div>
             <div class="box_description">
 				<div class="title">
-					Discription:
+					Description:
 				</div>
                 <?php
                 global $product;
@@ -89,7 +89,7 @@ if ( post_password_required() ) {
             </div>
         </div>
     </div>
-    <div class="list-product-wrap">
+<!--     <div class="list-product-wrap">
         <div class="inner-wrap">
             <div class="product-list">
                 <?php
@@ -129,7 +129,7 @@ if ( post_password_required() ) {
                 ?>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="popup-form">
         <div class="inner-wrap">
             <div class="popup-content">

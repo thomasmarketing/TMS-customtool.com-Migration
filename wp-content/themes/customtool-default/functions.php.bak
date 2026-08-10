@@ -348,30 +348,30 @@ add_filter('wpseo_breadcrumb_single_link', function($link_output, $link) {
 function remove_auto_sizes_css_fix($add_auto_sizes) {return false;}
 add_filter('wp_img_tag_add_auto_sizes', 'remove_auto_sizes_css_fix');
 
-function create_custom_product_posttype() {
-    register_post_type( 'product',
-    // CPT Options
-        array(
-            'labels' => array(
-            'name' => __( 'Product' ),
-            'singular_name' => __( 'Product' )
-            ),
-            'public' => true,
-            'publicly_queryable' => true,
-            'has_archive' => false,
-            'show_ui' => true,
-            'query_var' => false,
-            'rewrite' => array('slug' => 'product', 'with_front'  => false),
-            'capability_type' => 'post',
-            'hierarchical' => false,               
-            'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', ),
-        )
-    );
+// function create_custom_product_posttype() {
+//     register_post_type( 'product',
+//     // CPT Options
+//         array(
+//             'labels' => array(
+//             'name' => __( 'Product' ),
+//             'singular_name' => __( 'Product' )
+//             ),
+//             'public' => true,
+//             'publicly_queryable' => true,
+//             'has_archive' => false,
+//             'show_ui' => true,
+//             'query_var' => false,
+//             'rewrite' => array('slug' => 'product', 'with_front'  => false),
+//             'capability_type' => 'post',
+//             'hierarchical' => false,               
+//             'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', ),
+//         )
+//     );
     
-    flush_rewrite_rules( true );
+//     flush_rewrite_rules( true );
     
-}
-add_action( 'init', 'create_custom_product_posttype' );
+// }
+// add_action( 'init', 'create_custom_product_posttype' );
 
 // Add /blog/ prefix to category and date archives
 function custom_blog_archive_prefix() {
@@ -445,3 +445,32 @@ function custom_at_least_one_field_validation( $validation_result ) {
     $validation_result['form'] = $form;
     return $validation_result;
 }
+
+add_action('wp_enqueue_scripts', function () {
+    if (is_product()) {
+        wp_enqueue_script('wc-add-to-cart');
+    }
+});
+
+
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
+    ob_start();
+    ?>
+    <div class="popup-cart-body">
+        <?php wc_get_template('cart/mini-cart.php'); ?>
+    </div>
+    <?php
+    $fragments['.popup-cart-body'] = ob_get_clean();
+    return $fragments;
+});
+
+function mytheme_add_woocommerce_support() {
+    add_theme_support('woocommerce');
+
+    add_theme_support('wc-product-gallery-zoom');
+    add_theme_support('wc-product-gallery-lightbox');
+    add_theme_support('wc-product-gallery-slider');
+}
+add_action('after_setup_theme', 'mytheme_add_woocommerce_support');
+
+add_filter( 'woocommerce_show_page_title', '__return_false' );

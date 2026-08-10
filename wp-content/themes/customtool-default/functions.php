@@ -474,3 +474,15 @@ function mytheme_add_woocommerce_support() {
 add_action('after_setup_theme', 'mytheme_add_woocommerce_support');
 
 add_filter( 'woocommerce_show_page_title', '__return_false' );
+
+
+add_action('pre_get_posts', function ($query) {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    if (is_shop()) {
+
+        $query->set('post__in', array(2880, 2794)); 
+    }
+});

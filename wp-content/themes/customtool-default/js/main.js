@@ -1132,3 +1132,19 @@ jQuery(document).ready(function($) {
         $('.popup-cart').removeClass('active');
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.single_add_to_cart_button');
+
+    const svg = `
+        <svg class="cart-icon" width="23" height="23" viewBox="0 0 23 23" fill="none" aria-hidden="true">
+            <path fill="currentColor" d="M6.692 22.847c.651 0 1.18-.547 1.18-1.223 0-.675-.529-1.222-1.18-1.222s-1.178.547-1.178 1.222c0 .676.527 1.223 1.178 1.223M19.278 22.847c.651 0 1.18-.547 1.18-1.223 0-.675-.529-1.222-1.18-1.222s-1.178.547-1.178 1.222c0 .676.527 1.223 1.178 1.223M6.604 17.944h13.84v1.63H5.906c-.443 0-.747-.329-.798-.75l-.368-2.997L3.13 5.718 2.485 1.63H0V0h3.245c.355.066.633.302.684.684l.685 4.22h16.578c.52 0 .913.42.824.959l-1.572 9.78c-.063.42-.405.684-.823.684H6.413l.19 1.63zM19 14.684l1.305-8.15H4.867l1.344 8.163H19z"/>
+        </svg>
+    `;
+
+    buttons.forEach(button => {
+        if (button.querySelector('.cart-icon')) return;
+
+        button.insertAdjacentHTML('afterbegin', svg);
+    });
+});
