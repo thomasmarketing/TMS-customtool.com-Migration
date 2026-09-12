@@ -63,6 +63,24 @@
 					<?php endif; ?>
 					</a>
 				</div>
+
+				<div class="sf-thomas-badge">
+					<!-- Thomas Supplier Badge -->
+					<a href="https://www.thomasnet.com/profile/1045346?src=tnbadge" target="_blank" class="tn-badge__link">
+					<img 
+					src="https://img.thomascdn.com/badges/shield-tier-v-sm.png?cid=1045346"
+					srcset="https://img.thomascdn.com/badges/shield-tier-v-sm-2x.png?cid=1045346 2x" 
+					alt="Thomas Supplier"  title ="Thomas Supplier" 
+					class="tn-badge__img" />
+					</a>
+					<!-- End Thomas Supplier Badge -->
+					<a href="https://www.customtool.com/wp-content/uploads/Custom-Tool-ISO-cert-1.pdf" target="_blank" class="iso-cert__link">
+						<img 
+						src="https://www.customtool.com/wp-content/uploads/tqcsi-1.webp"
+						alt="Custom Tool ISO cert"  title ="Custom Tool ISO cert" 
+						class="iso-cert__img" />
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class="sf-copyright">

@@ -12,6 +12,12 @@
               <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" title="<?php echo $logo['alt']; ?>">
             <?php endif;?>
           </a> 
+			<a href="https://www.customtool.com/wp-content/uploads/Custom-Tool-ISO-cert-1.pdf" target="_blank" class="iso-cert__link">
+					  <img 
+						   src="https://www.customtool.com/wp-content/uploads/tqcsi-1.webp"
+						   alt="Custom Tool ISO cert"  title ="Custom Tool ISO cert" 
+						   class="iso-cert__img" />
+				  </a>
         </div>     
         <div class="sh-utility-nav">
           <a class="sh-ico-search search-link" target="_blank" href="#" aria-label="Search Icon"><span>Search</span></a>
@@ -24,12 +30,20 @@
       <div class="sh-sticky-wrap">
         <div class="inner-wrap">
           <div class="sh-inner">
-          <a href="<?php bloginfo('url'); ?>" class="site-logo">
-          <?php $logo = get_field('global_company_logo','option');
-            if( !empty($logo) ): ?>
-              <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" title="<?php echo $logo['alt']; ?>">
-          <?php endif;?>
-          </a>
+            <div class="header-cert-wrapper desktop-view">
+				  <a href="<?php bloginfo('url'); ?>" class="site-logo">
+				  <?php $logo = get_field('global_company_logo','option');
+					if( !empty($logo) ): ?>
+					  <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" title="<?php echo $logo['alt']; ?>">
+				  <?php endif;?>
+				  </a>
+				   <a href="https://www.customtool.com/wp-content/uploads/Custom-Tool-ISO-cert-1.pdf" target="_blank" class="iso-cert__link">
+					  <img 
+						   src="https://www.customtool.com/wp-content/uploads/tqcsi-1.webp"
+						   alt="Custom Tool ISO cert"  title ="Custom Tool ISO cert" 
+						   class="iso-cert__img" />
+				  </a>
+			  </div>
           <!--Site Nav-->
           <div class="site-nav-main-container">
           <div class="snc-wrap">
