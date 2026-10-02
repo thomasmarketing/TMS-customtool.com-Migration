@@ -483,6 +483,6 @@ add_action('pre_get_posts', function ($query) {
 
     if (is_shop()) {
 
-        $query->set('post__in', array(2880, 2794)); 
+        $query->set('post__in', array(3049, 3005)); 
     }
 });

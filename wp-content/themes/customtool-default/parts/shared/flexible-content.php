@@ -430,8 +430,8 @@
 
 
       <?php elseif( get_row_layout() == 'pillar_page_nav_module' ): ?>    
-      <section class="internal-links-nav">
-      	<div class="inner-wrap">
+      <section class="internal-links-nav"  <?php if( get_sub_field('class')): ?> id="<?php echo get_sub_field('class'); ?>"<?php endif; ?>>
+      	<div class="wrap">
 			<div class="isn-wrap">
 				<?php if( have_rows('isn_link_wrap') ): ?>
 				<ul class="internal-links-wrap">
@@ -509,7 +509,7 @@
 		</section>		
 
 		<?php elseif( get_row_layout() == 'homepage_industries_module' ): ?>
-		<section class="homepage-industries-module">
+		<section class="homepage-industries-module" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
 			<div class="him-top-wrap" <?php if( get_sub_field('him_bg')): ?>style="background-image: url(<?php echo get_sub_field('him_bg'); ?>);"<?php endif; ?>>
 				<div class="inner-wrap">
 					<?php if( get_sub_field('him_heading')): ?>
@@ -805,6 +805,15 @@
 						    <img class="pbm-img" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" title="<?php echo esc_attr($image['title']); ?>" />
 						<?php endif; ?>
 						    </a>
+												 <!-- ✅ Only renders on pillar page template -->
+									<?php if( is_page_template('pillar-page.php') ): ?>
+										<a class="pbm-view-all-btn"
+										href="<?php echo esc_url( $link_url ); ?>"
+										target="<?php echo esc_attr( $link_target ); ?>">
+											View More
+										</a>
+									<?php endif; ?>
+
 						<?php endif; ?>
 						<?php if( get_sub_field('pbm_title')): ?>
 						<span class="pbm-title"><?php echo get_sub_field('pbm_title'); ?></span>
@@ -915,7 +924,227 @@
 				<?php endif; ?>
 				</div>
 			</div>	
-		</section>	
+		</section>
+		
+		<?php elseif( get_row_layout() == 'anchor_links_nav_module' ): ?>
+	<section class="internal-links-nav new-pp-links">
+		<div class="inner-wrap">
+			<ul>
+				<?php if( have_rows('list_items') ): while ( have_rows('list_items') ) : the_row(); ?>
+					<li>
+						<?php 
+						$link = get_sub_field('aln_link');
+						if( $link ): 
+						    $link_url = $link['url'];
+						    $link_title = $link['title'];
+						    $link_target = $link['target'] ? $link['target'] : '_self';
+						    ?>
+						    <a class="aln-link smooth-scroll" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a>
+						<?php endif; ?>
+					</li>
+				<?php endwhile;endif; ?>
+			</ul>
+		</div>
+	</section>
+
+	<?php elseif( get_row_layout() == 'capabilities_section' ): ?>
+    <section class="cap-section">
+        <div class="inner-wrap">
+            <div class="cap-top">
+                <div class="cap-text">
+                    <?php if( get_sub_field('capabilities_intro_text') ): ?>
+                        <?php echo wp_kses_post(get_sub_field('capabilities_intro_text')); ?>
+                    <?php endif; ?>
+                </div>
+
+                <?php if( get_sub_field('capabilities_image') ): ?>
+                <div class="cap-image">
+                    <img  alt="Custom Tools" title="Custom Tools"  src="<?php echo get_sub_field('capabilities_image'); ?>" loading="lazy" />
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <?php $cap_skills = get_sub_field('capabilities_skills');
+            if( $cap_skills ): ?>
+            <div class="cap-skills-grid">
+                <?php foreach( $cap_skills as $skill ): ?>
+                    <div class="cap-skill-card" href="#<?php echo sanitize_title($skill['skill_name']); ?>-section">
+                        <?php echo esc_html($skill['skill_name']); ?>
+				</div>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+
+            <?php if( get_sub_field('bottom_content') ): ?>
+            <div class="cap-bottom-content">
+                <?php echo wp_kses_post(get_sub_field('bottom_content')); ?>
+            </div>
+            <?php endif; ?>
+        </div>
+    </section>
+
+	<?php elseif( get_row_layout() == 'complex_precision_section'  ): ?>
+    <section class="cps-section" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
+        <div class="inner-wrap">
+
+            <?php if( get_sub_field('section_heading') ): ?>
+                <h2 class="cps-heading"><?php echo esc_html(get_sub_field('section_heading')); ?></h2>
+            <?php endif; ?>
+
+            <?php if( get_sub_field('section_intro_text') ): ?>
+                <div class="cps-intro">
+                    <?php echo wp_kses_post(get_sub_field('section_intro_text')); ?>
+                </div>
+            <?php endif; ?>
+
+            <div class="cps-bottom">
+                <?php if( get_sub_field('section_image') ): ?>
+                <div class="cps-image">
+                    <?php $section_image = get_sub_field('section_image'); ?>
+                    <img
+                        src="<?php echo esc_url($section_image['url']); ?>"
+                        alt="<?php echo esc_attr($section_image['alt']); ?>"
+                        title="<?php echo esc_attr($section_image['title']); ?>"
+                        loading="lazy"
+                    />
+                </div>
+                <?php endif; ?>
+
+                <?php if( get_sub_field('section_content') ): ?>
+                <div class="cps-content">
+                    <?php echo wp_kses_post(get_sub_field('section_content')); ?>
+                </div>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </section>
+	<?php elseif( get_row_layout() == 'content_image_module' ): ?>
+    <section class="cto-section" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
+        <div class="inner-wrap">
+
+            <div class="cto-wrap">
+                <div class="cto-left">
+                    <?php if( get_sub_field('cto_heading') ): ?>
+                        <h2 class="cto-heading"><?php echo esc_html(get_sub_field('cto_heading')); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if( get_sub_field('cto_content') ): ?>
+                        <div class="cto-content">
+                            <?php echo wp_kses_post(get_sub_field('cto_content')); ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <?php $cto_image = get_sub_field('cto_image');
+                if( $cto_image ): ?>
+                <div class="cto-right">
+                    <img
+                        src="<?php echo esc_url($cto_image['url']); ?>"
+                        alt="<?php echo esc_attr($cto_image['alt']); ?>"
+                        title="<?php echo esc_attr($cto_image['title']); ?>"
+                        loading="lazy"
+                    />
+                </div>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    </section>
+<?php elseif( get_row_layout() == 'image_text_content_module' ): ?>
+    <section class="itc-section" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
+        <div class="inner-wrap">
+
+            <div class="itc-wrap <?php if( get_sub_field('itc_reverse') ): ?>itc-reverse<?php endif; ?>">
+
+                <?php $itc_image = get_sub_field('itc_image');
+                if( $itc_image ): ?>
+                <div class="itc-image">
+                    <img
+                        src="<?php echo esc_url($itc_image['url']); ?>"
+                        alt="<?php echo esc_attr($itc_image['alt']); ?>"
+                        title="<?php echo esc_attr($itc_image['title']); ?>"
+                        loading="lazy"
+                    />
+                </div>
+                <?php endif; ?>
+
+                <div class="itc-content">
+                    <?php if( get_sub_field('itc_heading') ): ?>
+                        <h2 class="itc-heading"><?php echo esc_html(get_sub_field('itc_heading')); ?></h2>
+                    <?php endif; ?>
+
+                    <?php if( get_sub_field('itc_content') ): ?>
+                        <div class="itc-text">
+                            <?php echo wp_kses_post(get_sub_field('itc_content')); ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+            </div>
+
+            <?php if( get_sub_field('itc_bottom_content') ): ?>
+            <div class="itc-bottom">
+                <?php echo wp_kses_post(get_sub_field('itc_bottom_content')); ?>
+            </div>
+            <?php endif; ?>
+
+        </div>
+    </section>
+	<?php elseif( get_row_layout() == 'industries_we_serve' ): ?>
+    <section class="iws-section" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
+        <div class="inner-wrap">
+
+            <?php if( get_sub_field('iws_heading') ): ?>
+                <h2 class="iws-heading"><?php echo esc_html(get_sub_field('iws_heading')); ?></h2>
+            <?php endif; ?>
+
+            <?php $industries = get_sub_field('iws_industries');
+            if( $industries ): ?>
+
+            <div class="iws-wrap">
+                <div class="iws-box">
+
+                    <!-- Industry List -->
+                    <div class="iws-list">
+                        <?php foreach( $industries as $index => $industry ): ?>
+                            <div class="iws-item <?php echo $index === 0 ? 'iws-active' : ''; ?>"
+                                 data-index="<?php echo $index; ?>">
+                                <?php echo esc_html($industry['iws_name']); ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- Industry Images -->
+                    <div class="iws-images">
+                        <?php foreach( $industries as $index => $industry ):
+                            $img = $industry['iws_image'];
+                            if( $img ): ?>
+                            <div class="iws-image <?php echo $index === 0 ? 'iws-image-active' : ''; ?>"
+                                 data-index="<?php echo $index; ?>">
+                                <img
+                                    src="<?php echo esc_url($img['url']); ?>"
+                                    alt="<?php echo esc_attr($img['alt']); ?>"
+                                    title="<?php echo esc_attr($img['title']); ?>"
+                                    loading="lazy"
+                                />
+                            </div>
+                        <?php endif; endforeach; ?>
+                    </div>
+
+                </div>
+            </div>
+
+            <?php endif; ?>
+
+        </div>
+    </section>
+	
+
+	
+
+
+
 	
 
 
