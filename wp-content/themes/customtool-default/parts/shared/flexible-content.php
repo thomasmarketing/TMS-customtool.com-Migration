@@ -1140,7 +1140,54 @@
         </div>
     </section>
 	
+	<?php elseif( get_row_layout() == 'grid_boxes' ):
+		$gb_class = 'gb-columns-' . (get_sub_field('gb_columns') ? get_sub_field('gb_columns') : 1); ?>
+    <section class="gb-section <?php echo $gb_class; ?>" <?php if( get_sub_field('id')): ?> id="<?php echo get_sub_field('id'); ?>"<?php endif; ?>>
+        <div class="inner-wrap">
 
+            <?php if( get_sub_field('gb_heading') ): ?>
+                <h2 class="gb-heading"><?php echo esc_html(get_sub_field('gb_heading')); ?></h2>
+            <?php endif; ?>
+
+            <?php if (have_rows('gb_boxes')) : ?>
+			<div class="gb-boxes">
+				<?php while (have_rows('gb_boxes')) : the_row();
+					$image = get_sub_field('image');
+					$title = get_sub_field('title');
+				?>
+					<div class="gb-item">
+						<?php if ($image) : ?>
+							<div class="gb-item-image">
+								<?php
+								if (is_array($image)) {
+									echo wp_get_attachment_image($image['ID'], 'large');
+								} elseif (is_numeric($image)) {
+									echo wp_get_attachment_image((int) $image, 'large');
+								} else {
+									?>
+									<img
+										src="<?php echo esc_url($image); ?>"
+										alt="<?php echo esc_attr($title); ?>"
+										loading="lazy"
+									>
+									<?php
+								}
+								?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ($title) : ?>
+							<p class="gb-item-title">
+								<?php echo esc_html($title); ?>
+							</p>
+						<?php endif; ?>
+					</div>
+				<?php endwhile; ?>
+			</div>
+		<?php endif; ?>
+
+        </div>
+    </section>
 	
 
 
